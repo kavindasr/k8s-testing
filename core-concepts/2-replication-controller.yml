@@ -12,11 +12,11 @@ spec:
       labels:
         app: nginx-pod
         type: frontend
-      spec:
-        containers:
-        - name: nginx-con
-          image: nginx:1.14.2
-          ports:
-          - containerPort: 80
+    spec:
+      containers:
+      - name: nginx-con
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
   replicas: 3
       
