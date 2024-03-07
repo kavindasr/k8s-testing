@@ -1,0 +1,14 @@
+# Ref: https://kubernetes.io/docs/concepts/policy/resource-quotas/
+# Limit the number of pods, and the CPU and memory resources that can be used in the dev namespace
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dev-quota
+  namespace: dev
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 5Gi
+    limits.cpu: "10"
+    limits.memory: 10Gi
