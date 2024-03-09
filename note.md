@@ -10,7 +10,7 @@
 ## Pod
 |Description | Command |
 |-----------------------|-----------------|
-|Create new pod     | `k run nginx --image=nginx` |
+|Create new pod     | `k run nginx --image=nginx -e color=pink` |
 |Create pod on specific port    | `k run nginx --image=nginx --port=8080`   |
 |Describe pod, can find errors       |`k describe pod <pod_id>` or `k describe po <pod_id>`    |
 |Get basic details   | `k get pods <pod_name> -o wide`     |
@@ -18,8 +18,10 @@
 |Edit running configuration         | `k edit pod <pod_name>` |
 |Delete pod         | `k delete pod <pod_name not id>`  |
 |View labels        | `k get pods --show-labels` or `k describe pod redis -> Labels`   |
+|Start the nginx pod using a different command and custom arguments | `k run nginx --image=nginx --command -- <cmd> `   |
 - When editing pods some values can't be change. The best way to do it is,
-`k get pod pod_name -o yaml > pod.yml` -> edit the file and delete the pod and create a new.
+`k get pod pod_name -o yaml > pod.yml` -> edit the file and delete the pod and create a new. If you try to edit invaild filed new changes will save in /tmp directory. Then you can use `k replace --force -f /tmp/kubectl-edit-398200391.yaml`
+    > spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
 
 ## ReplicationController & Replicaset
 |Description | Command |
@@ -57,6 +59,15 @@
 |Create new service expose port as a clusterip  | `k expose pod redis --port=6379 --name redis-service` (If name is not specified it will create a service with the pod's name)|
 |Create a pod and expose through a service  | `k run httpd --image=httpd:alpine --port=80 --expose=true`    |
 |Describe service   | `k describe svc httpd` (Endpoint: 10.1.1.1:80)    |
+
+## Evironemnt variables
+### ConfigMap
+|Description | Command |
+|-----------------------|-----------------|
+|Create a new config map named my-config based on folder bar   | `k create configmap my-config --from-file=path/to/bar`|
+|Create a new config map named my-config with key1=config1 | `k create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2` |
+|List all ConfigMaps    | `k get cm` or `k get configmaps`  |
+|View configmap values  | `k describe configmap my-configmap`   |
 
 ## ETC
 - formatting outputs

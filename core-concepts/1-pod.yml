@@ -24,3 +24,9 @@ spec:
       image: ubuntu-sleeper
       command: ["sleep2.0"] # Related to ENTRYPOINT in Dockerfile
       args: ["3"] # Related to CMD in Dockerfile
+      # command: # This is also valid
+      # - "sleep2.0"
+      # - "3"
+      env: # Environemnt variable
+      - name: color
+        value: pink
