@@ -11,12 +11,15 @@
 |Description | Command |
 |-----------------------|-----------------|
 |Create new pod     | `k run nginx --image=nginx` |
-|Describe pod, can find errors       |`k describe pod <pod_id>`    |
+|Create pod on specific port    | `k run nginx --image=nginx --port=8080`   |
+|Describe pod, can find errors       |`k describe pod <pod_id>` or `k describe po <pod_id>`    |
 |Get basic details   | `k get pods <pod_name> -o wide`     |
 |Create YAML file from command      | `k run redis --image=redis90 --dry-run=client -o yaml > pod.yaml`    |
 |Edit running configuration         | `k edit pod <pod_name>` |
 |Delete pod         | `k delete pod <pod_name not id>`  |
 |View labels        | `k get pods --show-labels` or `k describe pod redis -> Labels`   |
+- When editing pods some values can't be change. The best way to do it is,
+`k get pod pod_name -o yaml > pod.yml` -> edit the file and delete the pod and create a new.
 
 ## ReplicationController & Replicaset
 |Description | Command |
@@ -51,6 +54,9 @@
 |Description | Command |
 |-----------------------|-----------------|
 |Create service   | `k create namespace dev` or `k create ns dev` |
+|Create new service expose port as a clusterip  | `k expose pod redis --port=6379 --name redis-service` (If name is not specified it will create a service with the pod's name)|
+|Create a pod and expose through a service  | `k run httpd --image=httpd:alpine --port=80 --expose=true`    |
+|Describe service   | `k describe svc httpd` (Endpoint: 10.1.1.1:80)    |
 
 ## ETC
 - formatting outputs
