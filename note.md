@@ -69,6 +69,7 @@
 |Create a new config map named my-config with key1=config1 | `k create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2` |
 |List all ConfigMaps    | `k get cm` or `k get configmaps`  |
 |View configmap values  | `k describe configmap my-configmap`   |
+
 ### Secrets
 |Description | Command |
 |-----------------------|-----------------|
@@ -76,6 +77,12 @@
 |View secrets   | `k get secret`    |
 |View secrets' encoded values   | `k get secret my-secret -o yaml   |
 |View only secrets keys | `k describe secret my-secret`  |
+
+## ServiceAccount
+|Description | Command |
+|-----------------------|-----------------|
+|Create service account | `k create serviceaccount my-dashboard` or `k create sa my-dashboard`   |
+|Create token for service account   | `k create token my-dashboard` | 
 
 ## ETC
 - formatting outputs
