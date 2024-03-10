@@ -19,6 +19,7 @@
 |Delete pod         | `k delete pod <pod_name not id>`  |
 |View labels        | `k get pods --show-labels` or `k describe pod redis -> Labels`   |
 |Start the nginx pod using a different command and custom arguments | `k run nginx --image=nginx --command -- <cmd> `   |
+|Execute command inside a pod   | `k exec -it security-context-demo -- sh`    |
 - When editing pods some values can't be change. The best way to do it is,
 `k get pod pod_name -o yaml > pod.yml` -> edit the file and delete the pod and create a new. If you try to edit invaild filed new changes will save in /tmp directory. Then you can use `k replace --force -f /tmp/kubectl-edit-398200391.yaml`
     > spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
