@@ -18,3 +18,5 @@ DB_Password=password123
 controlplane ~ ➜  k create secret generic db-secret --from-env-file=data.env
 secret/db-secret created
 ```
+
+- To delete pods fast - `kubectl delete pod ubuntu-sleeper --force.`
