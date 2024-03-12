@@ -20,3 +20,12 @@ secret/db-secret created
 ```
 
 - To delete pods fast - `kubectl delete pod ubuntu-sleeper --force.`
+
+- The status OOMKilled indicates that it is failing because the pod ran out of memory. 
+```yaml
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       OOMKilled
+      Exit Code:    1
+```

@@ -11,6 +11,13 @@ spec:
     image: nginx:1.14.2
     ports:
     - containerPort: 80
+  resources:
+    requests: # Only limits are specfied requests == limits
+      memory: "1Gi" # "256Mi"
+      cpu: "200m"
+    limits:
+      memory: "2Gi" # Can use more than what is allocated, but application will terminated saying OOM(Out of Memory)
+      cpu: 1 # Can't use more CPU, application throttle
 ...
 apiVersion: v1
 kind: pod

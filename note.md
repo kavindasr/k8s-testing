@@ -84,6 +84,13 @@
 |Create service account | `k create serviceaccount my-dashboard` or `k create sa my-dashboard`   |
 |Create token for service account   | `k create token my-dashboard` | 
 
+## Taint and Tolerant
+|Description | Command |
+|-----------------------|-----------------|
+|Add Taint  | `k taint nodes node1 key1=value1:NoSchedule` (Possible values- NoSchedule[cannot schedule], PreferNoSchedule[try not to schedule], NoExecute[No execution])  |
+|Remove Taint   | `k taint node node1 key1=value1:NoSchedule-`    |
+|Add node label | `k label node node1 key1=value1`  |
+
 ## ETC
 - formatting outputs
 ```
