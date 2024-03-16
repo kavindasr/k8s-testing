@@ -39,6 +39,13 @@
 |-----------------------|-----------------|
 |Get deployments     | `k get deploy` or `k get deployments` |
 |Create deployment(Imperative command)  | `kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx-pod.yaml` |
+|Update deployment  | `k set image deployment/my-deployment nginx=nginx:1.9.1`  |
+|View deployment status | `k rollout status deployment/my-deployment`   |
+|View deployment history    | `k rollout history deployment/my-deployment`  |
+|View each deployment revision  | `k rollout history deployment nginx --revision=1` |
+|Save changes in change-cause section   | `k set image deployment nginx nginx=nginx:1.17 --record`|
+|Rollback deployment    | `k rollout undo deploy`   |
+|Rollout deployment     | `k rollout undo deployment nginx --to-revision=1`   |
 
 ## namespaces
 |Description | Command |
