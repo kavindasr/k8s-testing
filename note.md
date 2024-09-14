@@ -20,6 +20,7 @@
 |View labels        | `k get pods --show-labels` or `k describe pod redis -> Labels`   |
 |Start the nginx pod using a different command and custom arguments | `k run nginx --image=nginx --command -- <cmd> `   |
 |Execute command inside a pod   | `k exec -it security-context-demo -- sh`    |
+|Check user can list pods or not| `k auth can-i list pods --as dev-user`      |
 - When editing pods some values can't be change. The best way to do it is,
 `k get pod pod_name -o yaml > pod.yml` -> edit the file and delete the pod and create a new. If you try to edit invaild filed new changes will save in /tmp directory. Then you can use `k replace --force -f /tmp/kubectl-edit-398200391.yaml`
     > spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
@@ -40,7 +41,7 @@
 |Get deployments     | `k get deploy` or `k get deployments` |
 |Create deployment(Imperative command)  | `kubectl run nginx --image=nginx --dry-run=client -o yaml > nginx-pod.yaml` |
 |Update deployment  | `k set image deployment/my-deployment nginx=nginx:1.9.1`  |
-|View deployment status | `k rollout status deployment/my-deployment`   |
+|View current deployment status | `k rollout status deployment/my-deployment`   |
 |View deployment history    | `k rollout history deployment/my-deployment`  |
 |View each deployment revision  | `k rollout history deployment nginx --revision=1` |
 |Save changes in change-cause section   | `k set image deployment nginx nginx=nginx:1.17 --record`|
@@ -57,7 +58,7 @@
 |Set namespace to dev   | `k config set-context $(k config current-context) --namespace=dev`    |
 |Count pods in namespace    | `k get pods -n=research \| grep -c -v NAME` |
 
-- Calling service - `db-service.dev.svc.cluster.local`
+- Calling service - `db-service.dev.svc.cluster.local` or `http://webapp-service.default.svc.cluster.local:8080/info`
     - db-service(service name), dev(namespace), svc(service), cluster.local(default domain name)
 
 ## Service
@@ -98,6 +99,9 @@
 |Remove Taint   | `k taint node node1 key1=value1:NoSchedule-`    |
 |Add node label | `k label node node1 key1=value1`  |
 
+## API server
+- Can find kube configs - `/etc/kubernetes/manifests/kube-apiserver.yaml`
+
 ## ETC
 - formatting outputs
 ```
@@ -109,3 +113,6 @@
 
     -o yamlOutput a YAML formatted API object.
 ```
+- Explain all `k explain po.spec.containers --recursive` 
+- If you need to count rows 
+-- Print without header and count - `k get roles --no-headers | wc -l`
