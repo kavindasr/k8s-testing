@@ -60,6 +60,7 @@
 
 - Calling service - `db-service.dev.svc.cluster.local` or `http://webapp-service.default.svc.cluster.local:8080/info`
     - db-service(service name), dev(namespace), svc(service), cluster.local(default domain name)
+- To check service configured properly - `k exec -it httpd -- nslookup httpd.default.svc.cluster.local`
 
 ## Service
 |Description | Command |
@@ -77,6 +78,18 @@
 |Create a new config map named my-config with key1=config1 | `k create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2` |
 |List all ConfigMaps    | `k get cm` or `k get configmaps`  |
 |View configmap values  | `k describe configmap my-configmap`   |
+
+- Using configmap values inside the pod
+```yaml
+env:
+# Define the environment variable
+- name: PLAYER_INITIAL_LIVES # Notice that the case is different here
+                                # from the key name in the ConfigMap.
+    valueFrom:
+    configMapKeyRef:
+        name: game-demo           # The ConfigMap this value comes from.
+        key: player_initial_lives 
+```
 
 ### Secrets
 |Description | Command |
